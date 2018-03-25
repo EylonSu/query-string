@@ -222,7 +222,6 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var strictUriEncode = require('strict-uri-encode');
 var decodeComponent = require('decode-uri-component');
 
 function encoderForArrayFormat(options) {
@@ -291,6 +290,11 @@ function parserForArrayFormat(options) {
 			};
 	}
 }
+function strictUriEncode (str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function (x) {
+    return "%" + x.charCodeAt(0).toString(16).toUpperCase();
+  });
+};
 
 function encode(value, options) {
 	if (options.encode) {
@@ -299,6 +303,12 @@ function encode(value, options) {
 
 	return value;
 }
+
+function strictUriEncode (str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function (x) {
+    return "%" + x.charCodeAt(0).toString(16).toUpperCase();
+  });
+};
 
 function keysSorter(input) {
 	if (Array.isArray(input)) {
